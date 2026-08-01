@@ -1,0 +1,60 @@
+site_name: go-ruby-widgets docs
+site_description: "The Ruby face of go-widgets — pure-Go gem cores that rbgo binds as require \"widgets\" / \"tui\" / \"mvvm\"."
+site_url: https://go-ruby-widgets.github.io/docs/
+repo_url: https://github.com/go-ruby-widgets
+repo_name: go-ruby-widgets
+edit_uri: ""
+
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.instant
+    - content.code.copy
+    - search.suggest
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: red
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: red
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+extra:
+  version:
+    provider: mike
+    default: latest
+
+nav:
+  - Overview: index.md
+  - widgets: widgets.md
+  - tui: tui.md
+  - mvvm: mvvm.md
+  - Getting started in rbgo: rbgo.md
+  - Contributing: contributing.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
