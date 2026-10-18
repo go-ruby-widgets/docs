@@ -1,4 +1,9 @@
-# go-ruby-widgets
+---
+title: "Overview"
+weight: 10
+---
+
+# go-ruby-widgets {#go-ruby-widgets}
 
 Three pure-Go, Ruby-runtime-independent adapters over the
 [go-widgets](https://github.com/go-widgets) stack, shaped so that
@@ -23,7 +28,7 @@ each is equally usable as a standalone Go library — siblings of
 [go-ruby-regexp](https://github.com/go-ruby-regexp/regexp) and
 [go-ruby-erb](https://github.com/go-ruby-erb/erb) in the go-ruby-* family.
 
-## At a glance
+## At a glance {#at-a-glance}
 
 - **CGO-free** — builds and tests identically on `amd64`, `arm64`, `riscv64`,
   `loong64`, `ppc64le`, `s390x` (`widgets` also targets `js/wasm`, the
@@ -37,7 +42,7 @@ each is equally usable as a standalone Go library — siblings of
   decoded cell grid; `mvvm.DrainEvents` pulls a queue of callback-id-tagged
   event Hashes.
 
-## Install (Go)
+## Install (Go) {#install-go}
 
 ```sh
 go get github.com/go-ruby-widgets/widgets
@@ -45,6 +50,6 @@ go get github.com/go-ruby-widgets/tui
 go get github.com/go-ruby-widgets/mvvm
 ```
 
-See [widgets](widgets.md), [tui](tui.md) and [mvvm](mvvm.md) for each
+See [widgets]({{< relref "widgets.md" >}}), [tui]({{< relref "tui.md" >}}) and [mvvm]({{< relref "mvvm.md" >}}) for each
 adapter's full Ruby-facing surface, and [Getting started in
-rbgo](rbgo.md) for the `require` workflow.
+rbgo]({{< relref "rbgo.md" >}}) for the `require` workflow.

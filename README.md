@@ -3,8 +3,7 @@
 Documentation for [go-ruby-widgets](https://github.com/go-ruby-widgets) —
 the **widgets**, **tui** and **mvvm** Ruby adapters over the
 [go-widgets](https://github.com/go-widgets) stack — built with
-[MkDocs Material](https://squidfunk.github.io/mkdocs-material/) and versioned
-with [mike](https://github.com/jimporter/mike). Served at
+[Hugo](https://gohugo.io/) and this fleet's [Hextra fork](https://github.com/tannevaled/hextra) — upstream Hextra plus the opt-in features the fleet's sites use. Served at
 <https://go-ruby-widgets.github.io/docs/>.
 
 ## Build locally

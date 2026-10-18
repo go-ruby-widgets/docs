@@ -1,11 +1,16 @@
-# Contributing
+---
+title: "Contributing"
+weight: 60
+---
+
+# Contributing {#contributing}
 
 go-ruby-widgets is BSD-3-Clause. The code lives in three repos:
 [widgets](https://github.com/go-ruby-widgets/widgets),
 [tui](https://github.com/go-ruby-widgets/tui) and
 [mvvm](https://github.com/go-ruby-widgets/mvvm).
 
-## Ground rules
+## Ground rules {#ground-rules}
 
 - **CGO-free.** No cgo, ever — each package must build and test on `amd64`,
   `arm64`, `riscv64`, `loong64`, `ppc64le`, `s390x` (`widgets` also targets
@@ -20,7 +25,7 @@ go-ruby-widgets is BSD-3-Clause. The code lives in three repos:
   widgets, containers, layouts, border/card layout, data-binding, MVVM — with
   no third-party proprietary UI-framework naming.
 
-## Build & test
+## Build & test {#build-test}
 
 ```sh
 go build ./...
@@ -29,7 +34,7 @@ go test -race -coverprofile=cover.out ./...
 go tool cover -func=cover.out | tail -1   # must read 100.0%
 ```
 
-## Adding a Ruby-facing method
+## Adding a Ruby-facing method {#adding-a-ruby-facing-method}
 
 New surface follows the existing shape:
 
@@ -40,6 +45,6 @@ New surface follows the existing shape:
 3. `Call` and `Methods` pick it up automatically via reflection (its
    snake_case name derives from the Go method name); no dispatch table to
    update.
-4. Document it on the relevant [widgets](widgets.md) / [tui](tui.md) /
-   [mvvm](mvvm.md) page and, if it changes the intended rbgo surface, in
-   [Getting started in rbgo](rbgo.md).
+4. Document it on the relevant [widgets]({{< relref "widgets.md" >}}) / [tui]({{< relref "tui.md" >}}) /
+   [mvvm]({{< relref "mvvm.md" >}}) page and, if it changes the intended rbgo surface, in
+   [Getting started in rbgo]({{< relref "rbgo.md" >}}).

@@ -1,13 +1,21 @@
-# Getting started in rbgo
+---
+title: "Getting started in rbgo"
+weight: 50
+---
 
-!!! note "Status"
-    `require "widgets"`, `require "tui"` and `require "mvvm"` are **pending**
-    in [go-embedded-ruby/ruby](https://github.com/go-embedded-ruby/ruby)
-    (rbgo). This page documents the intended surface — everything below is
-    exactly what the three adapters already provide today via `Call`; only
-    the thin `method_missing` shim inside rbgo is outstanding.
+# Getting started in rbgo {#getting-started-in-rbgo}
 
-## Why three separate adapter repos
+{{< callout type="info" >}}
+**Status**
+
+`require "widgets"`, `require "tui"` and `require "mvvm"` are **pending**
+in [go-embedded-ruby/ruby](https://github.com/go-embedded-ruby/ruby)
+(rbgo). This page documents the intended surface — everything below is
+exactly what the three adapters already provide today via `Call`; only
+the thin `method_missing` shim inside rbgo is outstanding.
+{{< /callout >}}
+
+## Why three separate adapter repos {#why-three-separate-adapter-repos}
 
 None of `widgets`, `tui` or `mvvm` import rbgo or the Ruby runtime. Each is a
 standalone Go library whose handles already speak in Ruby-shaped values —
@@ -22,7 +30,7 @@ surface a `method_missing` shim needs. rbgo's job, once wired, is only to:
    `Widget` in `tui`, an `Observable`/`Command`/`ObservableList` in `mvvm`) as
    a Ruby object whose own `method_missing` also routes through `Call`.
 
-## Intended usage: widgets
+## Intended usage: widgets {#intended-usage-widgets}
 
 ```ruby
 require "widgets"
@@ -41,7 +49,7 @@ fired = Widgets.dispatch(ok, { "kind" => "click" })
 # => { "fired" => ["on_ok"], "repaint" => true }
 ```
 
-## Intended usage: tui
+## Intended usage: tui {#intended-usage-tui}
 
 ```ruby
 require "tui"
@@ -60,7 +68,7 @@ puts Tui.render(root, 40, 10)                      # => String (ANSI frame)
 fired = Tui.dispatch(button, {"kind" => "click"})  # => {"fired"=>["ok"], "repaint"=>true}
 ```
 
-## Intended usage: mvvm
+## Intended usage: mvvm {#intended-usage-mvvm}
 
 ```ruby
 require "mvvm"
@@ -74,7 +82,7 @@ Mvvm.drain_events.each do |ev|      # => Array<Hash>, once per UI tick
 end
 ```
 
-## Argument and result shapes
+## Argument and result shapes {#argument-and-result-shapes}
 
 Common to all three adapters:
 
@@ -92,7 +100,7 @@ Common to all three adapters:
 Any error from the underlying Go call raises inside `Call` and should surface
 as a Ruby exception once wired into rbgo's error-mapping convention.
 
-## Standalone Go usage today
+## Standalone Go usage today {#standalone-go-usage-today}
 
 Everything above is already exercised, without Ruby, in each repo's README
 and `example_test.go`:
