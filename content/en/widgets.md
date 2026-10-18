@@ -1,4 +1,9 @@
-# widgets
+---
+title: "widgets"
+weight: 20
+---
+
+# widgets {#widgets}
 
 The pure-Go, Ruby-runtime-independent core of the Ruby **`widgets`** gem: a
 live widget UI toolkit — buttons, labels, text fields, lists, menus and the
@@ -15,19 +20,19 @@ addressed by that handle and returns a Ruby-shaped value.
 `CGO_ENABLED=0`, no display, no network — cross-compiles to all six 64-bit Go
 architectures **and `js/wasm`** (the target [wasmdesk](https://github.com/wasmdesk) runs).
 
-## Constructors (return an opaque integer handle)
+## Constructors (return an opaque integer handle) {#constructors-return-an-opaque-integer-handle}
 
 | Kind | Methods |
 | --- | --- |
 | Leaves | `button(label, cb)`, `label(text)`, `entry(initial, cb)`, `text_view(initial)`, `check_button(label, checked, cb)`, `drop_down(options, selected, cb)`, `list_box(items, cb)`, `menu(items)`, `menu_bar` |
 | Containers | `container(layout)` (`fit`/`box`/`hbox`/`vbox`/`border`/`card`), `h_box`, `v_box`, `grid(cols, rows)`, `frame(child)`, `dock(body)`, `border` |
 
-## Mutation
+## Mutation {#mutation}
 
 `set_text` / `text`, `set_checked` / `checked`, `select(id, idx)`,
 `set_style`, `set_spacing`, and the module-wide `set_theme("light"|"dark")`.
 
-## Composition
+## Composition {#composition}
 
 `add_widget(parent, child)`, `add(parent, child, {flex:, size:, region:})`,
 `add_fixed`, `add_flex`, `attach(grid, child, col, row)`,
@@ -35,11 +40,11 @@ architectures **and `js/wasm`** (the target [wasmdesk](https://github.com/wasmde
 `add_menu(bar, name, menu)`, `set_active(card, idx)`,
 `set_layout(container, layout)`.
 
-## Layout / query
+## Layout / query {#layout-query}
 
 `set_bounds(id, x, y, w, h)`, `layout(id, w, h)` (at the origin), `bounds(id)`.
 
-## The render seam
+## The render seam {#the-render-seam}
 
 ```ruby
 img = Widgets.render(root, w, h)
@@ -49,7 +54,7 @@ img = Widgets.render(root, w, h)
 `pixels` is 4 bytes per pixel, row-major, top-left origin — exactly what a
 host (wasmbox) blits into a `<canvas>` / `SharedArrayBuffer`.
 
-## The event seam
+## The event seam {#the-event-seam}
 
 ```ruby
 out = Widgets.dispatch(root, { "kind" => "click", "x" => 10, "y" => 4 })
@@ -61,7 +66,7 @@ out = Widgets.dispatch(root, { "kind" => "click", "x" => 10, "y" => 4 })
 constructor; when it fires, that identifier appears in `fired` so the Ruby
 side can invoke the matching block.
 
-## Dynamic dispatch
+## Dynamic dispatch {#dynamic-dispatch}
 
 `Call(recv, method, args...) (any, error)` dispatches a snake_case method
 name to the matching `Module` method, coercing Ruby scalars / Arrays / Hashes
@@ -69,7 +74,7 @@ to the Go parameter types (a trailing `error` return is unwrapped) — the
 single entry point an rbgo `method_missing` shim drives. `Methods(recv)`
 lists the accepted names.
 
-## Usage from Go
+## Usage from Go {#usage-from-go}
 
 ```go
 m := widgets.NewModule()
@@ -84,7 +89,7 @@ img, _ := m.Render(root, 200, 80)                         // {"pixels":…, "str
 out, _ := m.Dispatch(ok, map[string]any{"kind": "click"}) // out["fired"] == []any{"on_ok"}
 ```
 
-## Usage from Ruby
+## Usage from Ruby {#usage-from-ruby}
 
 ```ruby
 require "widgets"
@@ -99,4 +104,4 @@ fired = Widgets.dispatch(ok, { "kind" => "click" })   # => { "fired" => ["on_ok"
 
 The `require "widgets"` binding lives in `rbgo` (a thin `method_missing` shim
 over `Call`); it is pending in that repo — see [Getting started in
-rbgo](rbgo.md).
+rbgo]({{< relref "rbgo.md" >}}).

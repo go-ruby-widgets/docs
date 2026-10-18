@@ -1,4 +1,9 @@
-# tui
+---
+title: "tui"
+weight: 30
+---
+
+# tui {#tui}
 
 The pure-Go, Ruby-runtime-independent core of the Ruby **`tui`** gem: a
 terminal-cell user-interface toolkit — widgets, layout containers, frame
@@ -13,7 +18,7 @@ identically on `amd64`, `arm64`, `riscv64`, `loong64`, `ppc64le`, `s390x`.
 **100 % test coverage**, race-clean; rendering is asserted at **cell
 precision** — no real terminal required.
 
-## `Module` — construction
+## `Module` — construction {#module-construction}
 
 Each returns a `Widget` handle:
 
@@ -29,7 +34,7 @@ Each returns a `Widget` handle:
 | `h_split` / `v_split` | draggable **split** panes |
 | `notebook` | **card layout**: a tab strip selects the visible page |
 
-## `Module` — layout, render and events
+## `Module` — layout, render and events {#module-layout-render-and-events}
 
 | Method | Returns |
 | --- | --- |
@@ -40,7 +45,7 @@ Each returns a `Widget` handle:
 | `decode_cells(ansi, cols, rows)` | a cell grid decoded from any ANSI string |
 | `dispatch(root, event)` | Hash `{fired => [ids], repaint => true}` |
 
-## `Widget`
+## `Widget` {#widget}
 
 An opaque handle. Its methods mutate props (`set_text`, `set_align`,
 `set_label`, `set_checked`, `set_fraction`, `set_items`, `set_selected`, …),
@@ -50,7 +55,7 @@ and wire callbacks by id (`on_click`, `on_toggle`, `on_select`, `on_change`,
 `on_tab_changed`). Every method checks the handle's `kind` and returns a
 clear error when it does not apply.
 
-## The render seam
+## The render seam {#the-render-seam}
 
 `render` returns a self-contained ANSI stream a Ruby host prints straight to
 a terminal. `render_cells` (and `decode_cells` over any ANSI string) return
@@ -66,7 +71,7 @@ where a color is `{"r"=>, "g"=>, "b"=>}` or `nil` for the terminal default.
 The decode path is backed by `go-widgets/tui`'s `DecodeANSI`, so a test can
 assert the output at cell precision.
 
-## Events
+## Events {#events}
 
 `dispatch` routes one event Hash — `{"kind"=>, "x"=>, "y"=>, "code"=>,
 "ctrl"=>, "shift"=>}` — into the tree, whose containers translate
@@ -74,7 +79,7 @@ coordinates and deliver it to the right leaf. Recognised kinds: `click`,
 `key_down`, `key_up`, `char`, `mouse_drag`, `mouse_up`, `tick`. It returns the
 ids of the callbacks that fired and whether a repaint is warranted.
 
-## Usage from Go
+## Usage from Go {#usage-from-go}
 
 ```go
 m := tui.NewModule()
@@ -94,7 +99,7 @@ res, _ := m.Dispatch(button, map[string]any{"kind": "click"})
 // res["fired"] == []any{"ok"}
 ```
 
-## Usage from Ruby
+## Usage from Ruby {#usage-from-ruby}
 
 ```ruby
 require "tui"
@@ -116,4 +121,4 @@ fired = Tui.dispatch(button, {"kind" => "click"}) # => {"fired"=>["ok"], "repain
 `Methods(recv)` lists every snake_case name `Call` accepts for a handle, and
 `Call(recv, name, args...)` is the uniform dynamic entry point rbgo binds.
 The `require "tui"` binding lives in `rbgo`; it is pending in that repo — see
-[Getting started in rbgo](rbgo.md).
+[Getting started in rbgo]({{< relref "rbgo.md" >}}).

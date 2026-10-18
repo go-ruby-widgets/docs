@@ -1,4 +1,9 @@
-# mvvm
+---
+title: "mvvm"
+weight: 40
+---
+
+# mvvm {#mvvm}
 
 The pure-Go, Ruby-runtime-independent core of the Ruby **`mvvm`** gem: the
 data-binding layer of the go-widgets ecosystem — an **Observable** property,
@@ -9,7 +14,7 @@ adapter over the dependency-free primitives of
 **CGO-free**, builds and tests identically on `amd64`, `arm64`, `riscv64`,
 `loong64`, `ppc64le`, `s390x`. **100 % statement coverage**, race-clean.
 
-## The callback seam (id + drain)
+## The callback seam (id + drain) {#the-callback-seam-id-drain}
 
 A hosted Go library cannot synchronously call a Ruby block, so this package
 does not try to. Instead every notification — an observable change, a
@@ -29,7 +34,7 @@ Ruby block  ──registers──▶  callback id  ──stored on subscribe/obs
 id (pass it to `unsubscribe` / `unobserve`); `drain_events` yields the
 pending events and empties the queue. Ruby owns the actual blocks.
 
-## `Module`
+## `Module` {#module}
 
 The package-level receiver (the `Mvvm` module under rbgo):
 
@@ -40,7 +45,7 @@ The package-level receiver (the `Mvvm` module under rbgo):
 | `observable_list(items)` | an `ObservableList` handle |
 | `drain_events` | Array of event Hashes (drains the queue) |
 
-## `Observable` — a bindable property
+## `Observable` — a bindable property {#observable-a-bindable-property}
 
 | Method | Returns |
 | --- | --- |
@@ -49,7 +54,7 @@ The package-level receiver (the `Mvvm` module under rbgo):
 | `subscribe(callback_id)` | an Int subscription id |
 | `unsubscribe(sub_id)` | — |
 
-## `Command` — a bindable action
+## `Command` — a bindable action {#command-a-bindable-action}
 
 | Method | Returns |
 | --- | --- |
@@ -58,7 +63,7 @@ The package-level receiver (the `Mvvm` module under rbgo):
 | `set_can_execute(bool)` | — (records executability, fires a change) |
 | `raise_can_execute_changed` | — |
 
-## `ObservableList` — a bindable collection
+## `ObservableList` — a bindable collection {#observablelist-a-bindable-collection}
 
 | Method | Returns |
 | --- | --- |
@@ -69,7 +74,7 @@ The package-level receiver (the `Mvvm` module under rbgo):
 | `observe(callback_id)` | an Int observer id |
 | `unobserve(sub_id)` | — |
 
-## Event shapes
+## Event shapes {#event-shapes}
 
 Each drained event is a Hash with a `"callback_id"`, a `"kind"` and its
 payload:
@@ -85,7 +90,7 @@ payload:
   "index"=>, "to"=>, "count"=>, "items"=>[...] }
 ```
 
-## Usage from Go
+## Usage from Go {#usage-from-go}
 
 ```go
 m := mvvm.NewModule()
@@ -112,7 +117,7 @@ for _, ev := range m.DrainEvents() {
 // do_save execute
 ```
 
-## Usage from Ruby
+## Usage from Ruby {#usage-from-ruby}
 
 ```ruby
 require "mvvm"
@@ -138,4 +143,4 @@ end
 `Methods(recv)` lists every snake_case name `Call` accepts for a handle, and
 `Call(recv, name, args...)` is the uniform dynamic entry point rbgo binds.
 The `require "mvvm"` binding lives in `rbgo`; it is pending in that repo —
-see [Getting started in rbgo](rbgo.md).
+see [Getting started in rbgo]({{< relref "rbgo.md" >}}).
